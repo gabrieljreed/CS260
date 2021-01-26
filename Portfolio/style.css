@@ -1,0 +1,35 @@
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* background-color: #41BBD9; */
+}
+
+.page {
+    width: 750px;
+    margin: 20px auto;
+    background-color: #ADCAD6;
+    padding: 50px;
+
+    font-family: "Futura", sans-serif;
+}
+
+h1 {
+    color: #F18F01;
+}
+
+h2 {
+    color: #444444;
+}
+
+h3 {
+    color: 
+}
+
+strong {
+    color: #5b5b5b;
+}
+
+ul {
+    color: #727272;
+}
