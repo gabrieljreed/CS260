@@ -28,6 +28,18 @@
 
 .item-relative {
     position: relative;
-    top: 30px;
-    left: 30px;
+    top: -30px;
+    left: -30px;
+}
+
+.item-absolute {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.item-fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
