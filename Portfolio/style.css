@@ -49,12 +49,42 @@
 }
 
 .page {
-    /* width: 750px;
-    margin: 20px auto; */
     background-color: #14213d;
     padding: 50px;
 
     font-family: "Futura", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.bio-container {
+    display: flex;
+}
+
+.bio-text {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.projects-container {
+    display: flex;
+}
+
+.projects-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-container {
+    display: flex;
+}
+
+.contact-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
 }
 
 .page p {
@@ -87,4 +117,33 @@ hr {
 
 .footer p {
     text-align: center;
+}
+
+img {
+    height: 250px;
+    width: 250px;
+}
+
+a:link {
+    text-decoration: none;
+    color: blue;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 600px) {
+    .bio-container,
+    .projects-container,
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .bio-text,
+    .contact-text {
+        margin-left: 0px;
+    }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+
 }
