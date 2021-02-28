@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-align: center;
+    color: #fff;
+}
+
+html {
+    background: rgb(11,21,54);
+    background: linear-gradient(rgba(12,64,198,1) 0%, rgba(11,21,54,1) 100%);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Fjalla One", sans-serif;
+}
+
+p {
+    padding-left: 20%;
+    padding-right: 20%;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.5;
+}
