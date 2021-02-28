@@ -1,0 +1,50 @@
+<h1>Mountains</h1>
+
+<div id="mountains"></div>
+
+<script>
+  const MOUNTAINS = [
+    {name: "Kilimanjaro", height: 5895, place: "Tanzania"},
+    {name: "Everest", height: 8848, place: "Nepal"},
+    {name: "Mount Fuji", height: 3776, place: "Japan"},
+    {name: "Vaalserberg", height: 323, place: "Netherlands"},
+    {name: "Denali", height: 6168, place: "United States"},
+    {name: "Popocatepetl", height: 5465, place: "Mexico"},
+    {name: "Mont Blanc", height: 4808, place: "Italy/France"}
+  ];
+
+  // Your code here
+  var tableNode = document.createElement("TABLE");
+  var tableRowNode = document.createElement("TR");
+
+  var columnNames = Object.getOwnPropertyNames(MOUNTAINS[0]);
+
+    columnNames.forEach((item, i) => {
+        var tableHeaderNode = document.createElement("TH");
+        var tableHeaderText = document.createTextNode(item);
+        tableHeaderNode.appendChild(tableHeaderText);
+        tableRowNode.appendChild(tableHeaderNode);
+    });
+
+  tableNode.appendChild(tableRowNode);
+
+  MOUNTAINS.forEach( item => {
+    var tableRow = document.createElement("TR");
+
+    for(const property in item) {
+      var tableElement = document.createElement("TD");
+      var elementText = document.createTextNode(item[property]);
+      if(typeof item[property] == "number") {
+        tableElement.style.textAlign = "right";
+      }
+      tableElement.appendChild(elementText);
+      tableRow.appendChild(tableElement);
+    }
+
+    tableNode.appendChild(tableRow);
+  });
+
+  var mountDiv = document.getElementById("mountains");
+  mountDiv.appendChild(tableNode);
+
+</script>
