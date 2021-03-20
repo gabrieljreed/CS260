@@ -63,11 +63,16 @@ h3 {
     text-align: center;
 }
 
-@media only screen and (max-width: 1100px) { /* Responsive Design - mobile styles */
+@media only screen and (max-width: 600px) { /* Responsive Design - mobile styles */
     .smallPics {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-around;
+    }
+
+    img {
+        height: 75px;
+        width: 75px;
     }
 }
 </style>

@@ -18,6 +18,7 @@
                 <div class="productText">
                     <div class="info">
                         <h1>{{mountain.mountain_name}}</h1>
+                        <p>{{mountain.mountain_height}} ft</p>
                     </div>
                     <div class="price">
                         <button class="auto" v-on:click="remove(product, index)">Remove from Favorites</button>
@@ -70,19 +71,6 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-.smallPics {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.smallPics img {
-    object-fit: cover;
-    margin: auto;
-    height: 150px;
-    width: 150px;
 }
 
 .products {
@@ -176,10 +164,16 @@ h2 {
 
 
 @media only screen and (max-width: 1100px) { /* Responsive Design - mobile styles */
-    .smallPics {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+    .product {
+        flex-direction: column;
+    }
+
+    .product-text {
+        flex-direction: column;
+    }
+
+    .price {
+        padding: 10px;
     }
 }
 
