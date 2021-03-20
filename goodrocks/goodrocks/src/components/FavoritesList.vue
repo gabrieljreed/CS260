@@ -8,11 +8,6 @@
             <p>Here are some of the great rocks you can add!</p>
             <br />
             <RelatedRocks :mountains="mountains" />
-            <!-- <div class="smallPics">
-                <router-link :to="'/mountain/'+random1"><img :src="'images/img_'+random1+'.jpg'" /></router-link>
-                <router-link :to="'/mountain/'+random2"><img :src="'images/img_'+random2+'.jpg'" /></router-link>
-                <router-link :to="'/mountain/'+random3"><img :src="'images/img_'+random3+'.jpg'" /></router-link>
-            </div> -->
             <br />
         </div>
         <div v-else class="products">
@@ -29,6 +24,10 @@
                     </div>
                 </div>
             </div>
+            <br />
+            <p>Here are some more rocks you might be interested in</p>
+            <RelatedRocks :mountains="mountains" />
+            <br />
         </div>
     </div>
 </template>
