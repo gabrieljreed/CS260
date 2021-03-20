@@ -3,11 +3,11 @@
         <h1>good rocks</h1>
         <h3><em>a site about good rocks for rock lovers</em></h3>
         <br />
-        <div class="search">
+        <!-- <div class="search">
             <form class="pure-form">
                 <i class="fas fa-search"></i><input v-model="searchText" />
             </form>
-        </div>
+        </div> -->
         <br />
         <button class="auto" v-on:click="shuffleArray()">Shuffle</button>
         <MountainList :mountains="mountains" :favorites="favorites" />

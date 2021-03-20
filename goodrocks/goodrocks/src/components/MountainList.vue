@@ -15,7 +15,7 @@
                     <p><router-link :to="'/mountain/'+mountain.id">Learn More</router-link></p>
                 </div>
                 <div v-if="favs.includes(mountain)">
-                    <button class="auto" v-on:click="unfavorite(mountain)">Unfavorite</button>
+                    <button class="auto" v-on:click="unfavorite(mountain)" style="background-color: #ff3b3f; color: white;">Unfavorite</button>
                 </div>
                 <div v-else>
                     <button class="auto" v-on:click="favorite(mountain, index)">Favorite</button>
@@ -71,6 +71,7 @@ export default {
 
 .mountain {
     padding: 10px;
+    padding-bottom: 50px;
 }
 
 .mountain img {

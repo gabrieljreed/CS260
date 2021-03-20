@@ -10,7 +10,7 @@
 
 
             <div v-if="favs.includes(mountain)">
-                <button class="auto" v-on:click="unfavorite(mountain)">Unfavorite</button>
+                <button class="auto" v-on:click="unfavorite(mountain)" style="background-color: #ff3b3f; color: white;">Unfavorite</button>
             </div>
             <div v-else>
                 <button class="auto" v-on:click="favorite(mountain)">Favorite</button>
