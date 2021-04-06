@@ -10,13 +10,13 @@
         </div>
         <br />
         <button class="auto" v-on:click="shuffleArray()">Shuffle</button>
-        <MountainList :mountains="mountains" :favorites="favorites" />
+        <MountainList :mountains="mountains" :favorites="favs" />
     </div>
 </template>
 
 <script>
 import MountainList from '@/components/MountainList.vue'
-// import underscore from 'underscore';
+import axios from "axios"
 export default {
     name: 'Home',
     components: {
@@ -25,6 +25,7 @@ export default {
     data() {
         return {
             searchText: '',
+            favs: [],
         }
     },
     methods: {
@@ -32,14 +33,21 @@ export default {
             var array = this.$root.$data.mountains;
             for (var i = array.length - 1; i > 0; i--) {
                 var j = Math.floor(Math.random() * (i + 1));
-                // debugger;
                 var temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
             }
             this.$root.$data.mountains = array;
             this.$root.$data.mountains.reverse();
-        }
+        },
+        async getLists() {
+            try {
+                const response = await axios.get("/api/lists");
+                this.favs = response.data;
+            } catch(error) {
+                console.log(error);
+            }
+        },
     },
     computed: {
         mountains() {
