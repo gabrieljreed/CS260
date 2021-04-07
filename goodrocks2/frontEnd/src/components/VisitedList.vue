@@ -68,22 +68,17 @@ export default {
     },
     methods: {
         async getRocks() {
-            console.log("getRocks");
-            try {
+
+
                 const response = await axios.get("/api/lists/606c9af21c85c77397aa37aa/rocks");
                 this.rocks = response.data;
-                console.log(this.rocks);
-            } catch(error) {
-                console.log(error);
-            }
+
         },
         async remove(mountain) {
-            try {
+
                 await axios.delete(`/api/lists/606c9af21c85c77397aa37aa/rocks/${mountain._id}`);
                 this.getRocks();
-            } catch(error) {
-                console.log(error);
-            }
+
         }
     },
 }

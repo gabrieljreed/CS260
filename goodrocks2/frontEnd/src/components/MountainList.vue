@@ -15,16 +15,18 @@
                 </div>
                 <div class="buttons">
 
-                    <div v-if="favs.includes(mountain)">
+                    <!-- <div v-if="favs.includes(mountain)">
                         <button class="auto" v-on:click="unfavorite(mountain)" style="background-color: #ff3b3f; color: white;">Unfavorite</button>
                     </div>
                     <div v-else>
-                        <button class="auto" v-on:click="favorite(mountain)">Add to Favorites</button>
-                    </div>
 
+                    </div> -->
+
+                    <button class="auto" v-on:click="favorite(mountain)">Add to Favorites</button>
                     <button class="auto" v-on:click="addToWishList(mountain)">Add to Wish List</button>
 
                     <button class="auto" v-on:click="addToVisitedList(mountain)">Add to Visited</button>
+
 
                 </div>
             </div>
@@ -59,7 +61,6 @@ export default {
     methods: {
         async favorite(mountain) {
             // this.$root.$data.favorites.push(mountain);
-            try {
                 await axios.post(`/api/lists/606c9be91c85c77397aa37ac/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
@@ -71,24 +72,11 @@ export default {
                     longitude: mountain.longitude
                 });
                 await this.getRocks();
-                // console.log(this.favs);
-                // console.log(this.favs.includes(mountain));
-                // FIXME: I think I need to search manually - maybe make an array of mountains that just has its id, then search through the ids? This could also work in the v-if statement
-            } catch(error) {
-                console.log(error);
-            }
         },
-        unfavorite(mountain, key) {
-            console.log(mountain);
-            console.log(key);
-            let arr = this.$root.$data.favorites;
-            const isMountain = (mt) => mt.id === mountain.id;
-            var index = arr.findIndex(isMountain);
-            this.$root.$data.favorites.splice(index, 1);
-        },
+
         async addToVisitedList(mountain) {
             // console.log(mountain);
-            try {
+
                 await axios.post(`/api/lists/606c9af21c85c77397aa37aa/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
@@ -100,13 +88,11 @@ export default {
                     longitude: mountain.longitude
                 });
                 this.getRocks();
-            } catch(error) {
-                console.log(error);
-            }
+
         },
         async addToWishList(mountain) {
             // console.log(mountain);
-            try {
+
                 await axios.post(`/api/lists/606c9bb01c85c77397aa37ab/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
@@ -118,21 +104,17 @@ export default {
                     longitude: mountain.longitude
                 });
                 this.getRocks();
-            } catch(error) {
-                console.log(error);
-            }
+
         },
         async getRocks() {
-            try {
+
                 const response = await axios.get("/api/lists/606c9be91c85c77397aa37ac/rocks");
                 this.favs = response.data;
                 const response2 = await axios.get("/api/lists/606c9af21c85c77397aa37aa/rocks");
                 this.wishList = response2.data;
                 const response3 = await axios.get("/api/lists/606c9bb01c85c77397aa37ab/rocks");
                 this.visited = response3.data;
-            } catch(error) {
-                console.log(error);
-            }
+
         },
     }
 }
@@ -173,5 +155,14 @@ export default {
 .buttons {
     display: flex;
     flex-direction: column;
+    white-space: normal;
+}
+
+button {
+    margin: 5px auto;
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    width: 50%;
 }
 </style>

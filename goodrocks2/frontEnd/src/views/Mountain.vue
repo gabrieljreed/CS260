@@ -9,11 +9,21 @@
             <p>Elevation: {{mountain.mountain_height}} ft</p>
 
 
-            <div v-if="favs.includes(mountain)">
-                <button class="auto" v-on:click="unfavorite(mountain)" style="background-color: #ff3b3f; color: white;">Unfavorite</button>
-            </div>
-            <div v-else>
-                <button class="auto" v-on:click="favorite(mountain)">Favorite</button>
+            <div class="buttons">
+
+                <!-- <div v-if="favs.includes(mountain)">
+                    <button class="auto" v-on:click="unfavorite(mountain)" style="background-color: #ff3b3f; color: white;">Unfavorite</button>
+                </div>
+                <div v-else>
+
+                </div> -->
+
+                <button class="auto" v-on:click="favorite(mountain)">Add to Favorites</button>
+
+                <button class="auto" v-on:click="addToWishList(mountain)">Add to Wish List</button>
+
+                <button class="auto" v-on:click="addToVisitedList(mountain)">Add to Visited</button>
+
             </div>
 
             <p> Mount {{mountain.mountain_name}} was discovered on {{mountain.date_discovered}} by {{mountain.explorer_name}}. {{mountain.details}} </p>
@@ -28,6 +38,7 @@
 
 <script>
 import RelatedRocks from '@/components/RelatedRocks.vue'
+import axios from "axios"
 export default {
     name: 'Home',
     components: {
@@ -39,16 +50,63 @@ export default {
         }
     },
     methods: {
-        favorite(mountain) {
-            this.$root.$data.favorites.push(mountain);
+        async favorite(mountain) {
+            // this.$root.$data.favorites.push(mountain);
+                await axios.post(`/api/lists/606c9be91c85c77397aa37ac/rocks`, {
+                    mountain_name: mountain.mountain_name,
+                    mountain_height: mountain.mountain_height,
+                    id: mountain.id,
+                    explorer_name: mountain.explorer_name,
+                    date_discovered: mountain.date_discovered,
+                    details: mountain.details,
+                    latitude: mountain.latitude,
+                    longitude: mountain.longitude
+                });
+                await this.getRocks();
         },
-        unfavorite(mountain) {
-            console.log(mountain);
-            let arr = this.$root.$data.favorites;
-            const isMountain = (mt) => mt.id === mountain.id;
-            var index = arr.findIndex(isMountain);
-            this.$root.$data.favorites.splice(index, 1);
-        }
+
+        async addToVisitedList(mountain) {
+            // console.log(mountain);
+
+                await axios.post(`/api/lists/606c9af21c85c77397aa37aa/rocks`, {
+                    mountain_name: mountain.mountain_name,
+                    mountain_height: mountain.mountain_height,
+                    id: mountain.id,
+                    explorer_name: mountain.explorer_name,
+                    date_discovered: mountain.date_discovered,
+                    details: mountain.details,
+                    latitude: mountain.latitude,
+                    longitude: mountain.longitude
+                });
+                this.getRocks();
+
+        },
+        async addToWishList(mountain) {
+            // console.log(mountain);
+
+                await axios.post(`/api/lists/606c9bb01c85c77397aa37ab/rocks`, {
+                    mountain_name: mountain.mountain_name,
+                    mountain_height: mountain.mountain_height,
+                    id: mountain.id,
+                    explorer_name: mountain.explorer_name,
+                    date_discovered: mountain.date_discovered,
+                    details: mountain.details,
+                    latitude: mountain.latitude,
+                    longitude: mountain.longitude
+                });
+                this.getRocks();
+
+        },
+        async getRocks() {
+
+                const response = await axios.get("/api/lists/606c9be91c85c77397aa37ac/rocks");
+                this.favs = response.data;
+                const response2 = await axios.get("/api/lists/606c9af21c85c77397aa37aa/rocks");
+                this.wishList = response2.data;
+                const response3 = await axios.get("/api/lists/606c9bb01c85c77397aa37ab/rocks");
+                this.visited = response3.data;
+
+        },
     },
     computed: {
         favs() {
@@ -88,6 +146,19 @@ export default {
     text-align: left;
     padding-left: 20px;
     padding-right: 50px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    margin: 5px auto;
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    width: 30%;
 }
 
 @media only screen and (max-width: 1100px) { /* Responsive Design - mobile styles */

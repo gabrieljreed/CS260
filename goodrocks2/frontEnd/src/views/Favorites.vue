@@ -36,12 +36,10 @@ export default {
     },
     methods: {
         async getLists() {
-            try {
+
                 const response = await axios.get("/api/lists");
                 this.favs = response.data;
-            } catch(error) {
-                console.log(error);
-            }
+
         },
     },
     computed: {
