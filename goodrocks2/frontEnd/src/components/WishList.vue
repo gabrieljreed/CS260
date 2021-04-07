@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div v-if="rocks.length === 0">
-            <h3>It looks like you haven't added any mountains to your Favorites list yet! Why don't you go add some?</h3>
+            <h3>It looks like you haven't added any mountains to your Wish List yet! Why don't you go add some?</h3>
 
             <br />
 
@@ -21,7 +21,7 @@
                         <p>{{mountain.mountain_height}} ft</p>
                     </div>
                     <div class="price">
-                        <button class="auto" v-on:click="remove(mountain)">Remove from Favorites List</button>
+                        <button class="auto" v-on:click="remove(mountain)">Remove from Wish List</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@ export default {
         async getRocks() {
             console.log("getRocks");
             try {
-                const response = await axios.get("/api/lists/606c9be91c85c77397aa37ac/rocks");
+                const response = await axios.get("/api/lists/606c9bb01c85c77397aa37ab/rocks");
                 this.rocks = response.data;
                 console.log(this.rocks);
             } catch(error) {
@@ -79,7 +79,7 @@ export default {
         },
         async remove(mountain) {
             try {
-                await axios.delete(`/api/lists/606c9be91c85c77397aa37ac/rocks/${mountain._id}`);
+                await axios.delete(`/api/lists/606c9bb01c85c77397aa37ab/rocks/${mountain._id}`);
                 this.getRocks();
             } catch(error) {
                 console.log(error);

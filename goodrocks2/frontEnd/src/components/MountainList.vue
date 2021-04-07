@@ -13,14 +13,20 @@
                     <p>Discovered by {{mountain.explorer_name}} on {{mountain.date_discovered}}</p>
                     <p><router-link :to="'/mountain/'+mountain.id">Learn More</router-link></p>
                 </div>
-                <div v-if="favs.includes(mountain)">
-                    <button class="auto" v-on:click="unfavorite(mountain)" style="background-color: #ff3b3f; color: white;">Unfavorite</button>
+                <div class="buttons">
+
+                    <div v-if="favs.includes(mountain)">
+                        <button class="auto" v-on:click="unfavorite(mountain)" style="background-color: #ff3b3f; color: white;">Unfavorite</button>
+                    </div>
+                    <div v-else>
+                        <button class="auto" v-on:click="favorite(mountain)">Add to Favorites</button>
+                    </div>
+
+                    <button class="auto" v-on:click="addToWishList(mountain)">Add to Wish List</button>
+
+                    <button class="auto" v-on:click="addToVisitedList(mountain)">Add to Visited</button>
+
                 </div>
-                <div v-else>
-                    <button class="auto" v-on:click="favorite(mountain)">Add to Favorites</button>
-                </div>
-                <button class="auto" v-on:click="addToWishList(mountain)">Add to Wish List</button>
-                <button class="auto" v-on:click="addToVisitedList(mountain)">Add to Visited</button>
             </div>
         </div>
     </div>
@@ -35,27 +41,39 @@ export default {
         mountains: Array,
         favorites: Array
     },
-    computed: {
-        favs() {
-            return this.$root.$data.favorites;
+    data() {
+        return {
+            favs: [],
+            wishList: [],
+            visited: [],
         }
+    },
+    created() {
+        this.getRocks();
+    },
+    computed: {
+        // favs() {
+        //     return this.$root.$data.favorites;
+        // }
     },
     methods: {
         async favorite(mountain) {
             // this.$root.$data.favorites.push(mountain);
-            console.log(mountain);
             try {
                 await axios.post(`/api/lists/606c9be91c85c77397aa37ac/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
-                    id: mountain.mountain_id,
+                    id: mountain.id,
                     explorer_name: mountain.explorer_name,
                     date_discovered: mountain.date_discovered,
                     details: mountain.details,
                     latitude: mountain.latitude,
                     longitude: mountain.longitude
                 });
-                // this.getItems(); FIXME: Make the right method for this
+                await this.getRocks();
+                // console.log(this.favs);
+                // console.log(this.favs.includes(mountain));
+                // FIXME: I think I need to search manually - maybe make an array of mountains that just has its id, then search through the ids? This could also work in the v-if statement
             } catch(error) {
                 console.log(error);
             }
@@ -69,37 +87,49 @@ export default {
             this.$root.$data.favorites.splice(index, 1);
         },
         async addToVisitedList(mountain) {
-            console.log(mountain);
+            // console.log(mountain);
             try {
                 await axios.post(`/api/lists/606c9af21c85c77397aa37aa/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
-                    id: mountain.mountain_id,
+                    id: mountain.id,
                     explorer_name: mountain.explorer_name,
                     date_discovered: mountain.date_discovered,
                     details: mountain.details,
                     latitude: mountain.latitude,
                     longitude: mountain.longitude
                 });
-                // this.getItems(); FIXME: Make the right method for this
+                this.getRocks();
             } catch(error) {
                 console.log(error);
             }
         },
         async addToWishList(mountain) {
-            console.log(mountain);
+            // console.log(mountain);
             try {
                 await axios.post(`/api/lists/606c9bb01c85c77397aa37ab/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
-                    id: mountain.mountain_id,
+                    id: mountain.id,
                     explorer_name: mountain.explorer_name,
                     date_discovered: mountain.date_discovered,
                     details: mountain.details,
                     latitude: mountain.latitude,
                     longitude: mountain.longitude
                 });
-                // this.getItems(); FIXME: Make the right method for this
+                this.getRocks();
+            } catch(error) {
+                console.log(error);
+            }
+        },
+        async getRocks() {
+            try {
+                const response = await axios.get("/api/lists/606c9be91c85c77397aa37ac/rocks");
+                this.favs = response.data;
+                const response2 = await axios.get("/api/lists/606c9af21c85c77397aa37aa/rocks");
+                this.wishList = response2.data;
+                const response3 = await axios.get("/api/lists/606c9bb01c85c77397aa37ab/rocks");
+                this.visited = response3.data;
             } catch(error) {
                 console.log(error);
             }
@@ -138,5 +168,10 @@ export default {
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
 }
 </style>

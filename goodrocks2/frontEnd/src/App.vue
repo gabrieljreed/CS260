@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link id="random" :to="'/mountain/'+Math.floor(Math.random() * Math.floor(100))" v-on:click="location.reload()">Random Rocks</router-link> |
-      <router-link to="/favorites">Favorites</router-link>
+      <router-link to="/favorites">My Lists</router-link>
     </div>
 
     <router-view/>

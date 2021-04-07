@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 const app = express();
 
@@ -115,11 +116,12 @@ app.get("/api/lists/:listID/rocks", async(req, res) => {
 // Removing a mountain from a list
 app.delete("/api/lists/:listID/rocks/:rockID", async(req, res) => {
     try {
-        let rock = await Rock.find({_id: req.params.rockID, list: req.params.listID});
+        let rock = await Rock.findOne({_id: ObjectId(req.params.rockID), list: req.params.listID});
         if(!rock) {
             res.sendStatus(404);
             return;
         }
+
         await rock.delete();
         res.sendStatus(200);
     } catch(error) {
