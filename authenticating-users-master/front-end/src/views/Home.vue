@@ -1,19 +1,22 @@
 <template>
 <div>
-    <MyTickets v-if="user" />
-    <HomePage v-else />
+  <Admin v-if="user && user.role === 'admin'" />
+  <MyTickets v-else-if="user" />
+  <HomePage v-else />
 </div>
 </template>
 
 <script>
 import HomePage from '@/components/HomePage.vue'
 import MyTickets from "@/components/MyTickets.vue"
+import Admin from "@/components/Admin.vue"
 import axios from "axios"
 export default {
   name: 'home',
   components: {
-    HomePage,
-    MyTickets
+        HomePage,
+        MyTickets,
+        Admin
     },
     async created() {
         try {

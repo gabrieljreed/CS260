@@ -29,5 +29,8 @@ app.use(cookieSession({
 const users = require("./users.js");
 app.use("/api/users", users.routes);
 
+const tickets = require("./tickets.js");
+app.use("/api/tickets", tickets.routes);
+
 // Listen
 app.listen(3000, () => console.log("Server is running on port 3000 :)"));

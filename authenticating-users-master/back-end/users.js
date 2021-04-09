@@ -5,10 +5,14 @@ const argon2 = require("argon2");
 const router = express.Router();
 
 const userSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    username: String,
-    password: String
+  firstName: String,
+  lastName: String,
+  username: String,
+  password: String,
+  role: {
+    type: String,
+    default: ""
+  }
 });
 
 userSchema.pre('save', async function(next) {
@@ -172,6 +176,17 @@ router.get('/', validUser, async (req, res) => {
     res.send({
       user: req.user
     });
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+});
+
+// logout
+router.delete("/", validUser, async (req, res) => {
+  try {
+    req.session = null;
+    res.sendStatus(200);
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
