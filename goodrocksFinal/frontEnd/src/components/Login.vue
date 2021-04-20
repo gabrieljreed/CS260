@@ -78,7 +78,6 @@ export default {
                     lastName: this.lastName,
                     username: this.username,
                     password: this.password,
-
                 });
 
                 this.$root.$data.user = response.data.user;
@@ -91,10 +90,7 @@ export default {
             this.error = "";
             this.errorLogin = "";
 
-            console.log(this.usernameLogin, this.passwordLogin);
-
             if(!this.usernameLogin || !this.passwordLogin) {
-                console.log("Here");
                 return;
             }
 
@@ -103,11 +99,6 @@ export default {
                     username: this.usernameLogin,
                     password: this.passwordLogin,
                 });
-
-                console.log(response);
-                console.log(response.data.user);
-
-
 
                 this.$root.$data.user = response.data.user;
             } catch(error) {

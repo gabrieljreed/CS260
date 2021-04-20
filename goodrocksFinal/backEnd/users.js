@@ -94,7 +94,7 @@ const validUser = async (req, res, next) => {
 
 // create a new user
 router.post('/', async (req, res) => {
-    // This next line often causes errors. I wonder if it's because I'm putting a call to it in Home.vue and it should only be in Favorites? I wonder if it crashes/hangs the server and so it can't process any more requests after. I don't think you really need cookies to pass this assignment, but it would be nice 
+    // This next line often causes errors. I wonder if it's because I'm putting a call to it in Home.vue and it should only be in Favorites? I wonder if it crashes/hangs the server and so it can't process any more requests after. I don't think you really need cookies to pass this assignment, but it would be nice
     if (!req.body.username || !req.body.password)
         return res.status(400).send({
             message: "username and password are required"
@@ -176,7 +176,17 @@ router.get('/', validUser, async (req, res) => {
 });
 
 // logout
-router.delete("/", validUser, async (req, res) => {
+// router.delete("/", validUser, async (req, res) => {
+//     try {
+//         req.session = null;
+//         res.sendStatus(200);
+//     } catch (error) {
+//         console.log(error);
+//         return res.sendStatus(500);
+//     }
+// });
+
+router.delete("/", async (req, res) => {
     try {
         req.session = null;
         res.sendStatus(200);
