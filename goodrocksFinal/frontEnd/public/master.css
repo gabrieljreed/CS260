@@ -1,0 +1,9 @@
+* {
+    font-family: 'Kumbh Sans', sans-serif;
+    background-color: #efefef;
+    color: #595959;
+}
+
+button {
+    border-radius: 5px;
+}
