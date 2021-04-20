@@ -70,13 +70,13 @@ export default {
         async getRocks() {
 
 
-                const response = await axios.get("/api/lists/606c9bb01c85c77397aa37ab/rocks");
+                const response = await axios.get("/api/lists/606d4965ffdca51db41276d2/rocks");
                 this.rocks = response.data;
 
         },
         async remove(mountain) {
 
-                await axios.delete(`/api/lists/606c9bb01c85c77397aa37ab/rocks/${mountain._id}`);
+                await axios.delete(`/api/lists/606d4965ffdca51db41276d2/rocks/${mountain._id}`);
                 this.getRocks();
 
         }

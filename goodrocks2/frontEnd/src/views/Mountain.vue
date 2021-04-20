@@ -52,7 +52,7 @@ export default {
     methods: {
         async favorite(mountain) {
             // this.$root.$data.favorites.push(mountain);
-                await axios.post(`/api/lists/606c9be91c85c77397aa37ac/rocks`, {
+                await axios.post(`/api/lists/606d4923ffdca51db41276d0/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
                     id: mountain.id,
@@ -68,7 +68,7 @@ export default {
         async addToVisitedList(mountain) {
             // console.log(mountain);
 
-                await axios.post(`/api/lists/606c9af21c85c77397aa37aa/rocks`, {
+                await axios.post(`/api/lists/606d494bffdca51db41276d1/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
                     id: mountain.id,
@@ -84,7 +84,7 @@ export default {
         async addToWishList(mountain) {
             // console.log(mountain);
 
-                await axios.post(`/api/lists/606c9bb01c85c77397aa37ab/rocks`, {
+                await axios.post(`/api/lists/606d4965ffdca51db41276d2/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
                     id: mountain.id,
@@ -99,11 +99,11 @@ export default {
         },
         async getRocks() {
 
-                const response = await axios.get("/api/lists/606c9be91c85c77397aa37ac/rocks");
+                const response = await axios.get("/api/lists/606d4923ffdca51db41276d0/rocks");
                 this.favs = response.data;
-                const response2 = await axios.get("/api/lists/606c9af21c85c77397aa37aa/rocks");
+                const response2 = await axios.get("/api/lists/606d4965ffdca51db41276d2/rocks");
                 this.wishList = response2.data;
-                const response3 = await axios.get("/api/lists/606c9bb01c85c77397aa37ab/rocks");
+                const response3 = await axios.get("/api/lists/606d4965ffdca51db41276d2/rocks");
                 this.visited = response3.data;
 
         },

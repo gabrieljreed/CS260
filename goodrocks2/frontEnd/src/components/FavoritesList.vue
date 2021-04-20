@@ -68,15 +68,14 @@ export default {
     },
     methods: {
         async getRocks() {
-            console.log("getRocks");
 
-                const response = await axios.get("/api/lists/606c9be91c85c77397aa37ac/rocks");
+                const response = await axios.get("/api/lists/606d4923ffdca51db41276d0/rocks");
                 this.rocks = response.data;
 
         },
         async remove(mountain) {
 
-                await axios.delete(`/api/lists/606c9be91c85c77397aa37ac/rocks/${mountain._id}`);
+                await axios.delete(`/api/lists/606d4923ffdca51db41276d0/rocks/${mountain._id}`);
                 this.getRocks();
 
         }
