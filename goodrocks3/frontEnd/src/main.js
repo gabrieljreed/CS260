@@ -7,6 +7,7 @@ let data = {
     mountains: mock,
     lists: [[],[]],
     favorites: [],
+    user: null
 }
 
 Vue.config.productionTip = false

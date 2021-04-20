@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Mountain from '../views/Mountain.vue'
 import Favorites from '../views/Favorites.vue'
+import Login from "../views/Login.vue"
 
 Vue.use(VueRouter)
 
@@ -29,7 +30,12 @@ const routes = [
         path: '/favorites',
         name: 'Favorites',
         component: Favorites
-    }
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
 
 ]
 

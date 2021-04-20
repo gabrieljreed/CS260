@@ -1,6 +1,9 @@
 <template>
     <div class="home">
         <h1>good rocks</h1>
+        <button v-if="user" class="auto" v-on:click="logout()">Logout</button>
+        <router-link :to="'/login'" v-else> <button class="auto">login / signup</button> </router-link>
+
         <h3><em>a site about good rocks for rock lovers</em></h3>
         <br />
         <div class="search">
@@ -41,11 +44,27 @@ export default {
             this.$root.$data.mountains.reverse();
         },
         async getLists() {
-            
+
                 const response = await axios.get("/api/lists");
                 this.favs = response.data;
 
         },
+        async logout() {
+          try {
+            await axios.delete("/api/users");
+            this.$root.$data.user = null;
+          } catch (error) {
+            this.$root.$data.user = null;
+          }
+        },
+    },
+    async created() {
+        try {
+            let response = await axios.get("/api/users");
+            this.$root.$data.user = response.data.user;
+        } catch(error) {
+            this.$root.$data.user = null;
+        }
     },
     computed: {
         mountains() {
@@ -53,6 +72,9 @@ export default {
         },
         favorites() {
             return this.$root.$data.favorites;
+        },
+        user() {
+            return this.$root.$data.user;
         }
     },
 }
