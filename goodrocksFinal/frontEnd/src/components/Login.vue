@@ -81,6 +81,28 @@ export default {
                 });
 
                 this.$root.$data.user = response.data.user;
+
+                await axios.post("/api/lists", {
+                    name: "Favorites",
+                    ranking: 1,
+                    user: this.$root.$data.user,
+                    username: this.$root.$data.user.username,
+                });
+
+                await axios.post("/api/lists", {
+                    name: "Wish List",
+                    ranking: 2,
+                    user: this.$root.$data.user,
+                    username: this.$root.$data.user.username,
+                });
+
+                await axios.post("/api/lists", {
+                    name: "Visited",
+                    ranking: 3,
+                    user: this.$root.$data.user,
+                    username: this.$root.$data.user.username,
+                });
+
             } catch(error) {
                 this.error = error.response.data.message;
                 this.$root.$data.user = null;

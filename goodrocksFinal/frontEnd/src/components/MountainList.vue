@@ -13,7 +13,7 @@
                     <p>Discovered by {{mountain.explorer_name}} on {{mountain.date_discovered}}</p>
                     <p><router-link :to="'/mountain/'+mountain.id">Learn More</router-link></p>
                 </div>
-                <div class="buttons">
+                <div v-if="user" class="buttons">
 
                     <!-- <div v-if="favs.includes(mountain)">
                         <button class="auto" v-on:click="unfavorite(mountain)" style="background-color: #ff3b3f; color: white;">Unfavorite</button>
@@ -28,6 +28,11 @@
                     <button class="auto" v-on:click="addToVisitedList(mountain)">Add to Visited</button>
 
 
+                </div>
+                <div v-else>
+                    <p>
+                        Login or sign up to add this rock to a list!
+                    </p>
                 </div>
             </div>
         </div>
@@ -54,30 +59,34 @@ export default {
         this.getRocks();
     },
     computed: {
-        // favs() {
-        //     return this.$root.$data.favorites;
-        // }
+        user() {
+            return this.$root.$data.user;
+        },
     },
     methods: {
         async favorite(mountain) {
-            // this.$root.$data.favorites.push(mountain);
-                await axios.post(`/api/lists/606c9be91c85c77397aa37ac/rocks`, {
-                    mountain_name: mountain.mountain_name,
-                    mountain_height: mountain.mountain_height,
-                    id: mountain.id,
-                    explorer_name: mountain.explorer_name,
-                    date_discovered: mountain.date_discovered,
-                    details: mountain.details,
-                    latitude: mountain.latitude,
-                    longitude: mountain.longitude
-                });
-                await this.getRocks();
+            let username = this.$root.$data.user.username;
+            let response = await axios.get(`/api/lists/user/${username}/Favorites`);
+            let listID = response.data.list[0]._id;
+
+            await axios.post(`/api/lists/${listID}/rocks`, {
+                mountain_name: mountain.mountain_name,
+                mountain_height: mountain.mountain_height,
+                id: mountain.id,
+                explorer_name: mountain.explorer_name,
+                date_discovered: mountain.date_discovered,
+                details: mountain.details,
+                latitude: mountain.latitude,
+                longitude: mountain.longitude
+            });
+            await this.getRocks();
         },
 
         async addToVisitedList(mountain) {
-            // console.log(mountain);
-
-                await axios.post(`/api/lists/606c9af21c85c77397aa37aa/rocks`, {
+                let username = this.$root.$data.user.username;
+                let response = await axios.get(`/api/lists/user/${username}/Visited`);
+                let listID = response.data.list[0]._id;
+                await axios.post(`/api/lists/${listID}/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
                     id: mountain.id,
@@ -91,9 +100,10 @@ export default {
 
         },
         async addToWishList(mountain) {
-            // console.log(mountain);
-
-                await axios.post(`/api/lists/606c9bb01c85c77397aa37ab/rocks`, {
+            let username = this.$root.$data.user.username;
+            let response = await axios.get(`/api/lists/user/${username}/Wish List`);
+            let listID = response.data.list[0]._id;
+                await axios.post(`/api/lists/${listID}/rocks`, {
                     mountain_name: mountain.mountain_name,
                     mountain_height: mountain.mountain_height,
                     id: mountain.id,
@@ -107,14 +117,23 @@ export default {
 
         },
         async getRocks() {
-
-                const response = await axios.get("/api/lists/606c9be91c85c77397aa37ac/rocks");
+            if(this.$root.$data.user) {
+                let username = this.$root.$data.user.username;
+                var responseList = await axios.get(`/api/lists/user/${username}/Favorites`);
+                var listID = responseList.data.list[0]._id;
+                const response = await axios.get(`/api/lists/${listID}/rocks`);
                 this.favs = response.data;
-                const response2 = await axios.get("/api/lists/606c9af21c85c77397aa37aa/rocks");
-                this.wishList = response2.data;
-                const response3 = await axios.get("/api/lists/606c9bb01c85c77397aa37ab/rocks");
-                this.visited = response3.data;
 
+                responseList = await axios.get(`/api/lists/user/${username}/Wish List`);
+                listID = responseList.data.list[0]._id;
+                const response2 = await axios.get(`/api/lists/${listID}/rocks`);
+                this.wishList = response2.data;
+
+                responseList = await axios.get(`/api/lists/user/${username}/Visited`);
+                listID = responseList.data.list[0]._id;
+                const response3 = await axios.get(`/api/lists/${listID}/rocks`);
+                this.visited = response3.data;
+            }
         },
     }
 }

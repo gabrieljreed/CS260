@@ -28,9 +28,19 @@ mongoose.connect('mongodb://localhost:27017/goodrocks', {
 //     }
 // }));
 
+const users = require("./users.js");
+app.use("/api/users", users.routes);
+
+const User = users.model;
+
 const listSchema = new mongoose.Schema({
     name: String,
     ranking: Number,
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User"
+    },
+    username: String
 });
 
 const List = mongoose.model('List', listSchema);
@@ -39,7 +49,9 @@ const List = mongoose.model('List', listSchema);
 app.post("/api/lists", async(req, res) => {
     const list = new List({
         name: req.body.name,
-        ranking: req.body.number
+        ranking: req.body.number,
+        user: req.body.user,
+        username: req.body.username
     });
     try {
         await list.save();
@@ -55,6 +67,37 @@ app.get("/api/lists", async(req, res) => {
     try {
         let lists = await List.find();
         res.send(lists);
+    } catch(error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+// Get the lists for a given user
+app.get("/api/lists/user/:username", async(req, res) => {
+    try {
+        let lists = await List.find({
+            username: req.params.username
+        });
+        return res.send({
+            lists: lists
+        });
+    } catch(error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+// Get a specific list for a given user
+app.get("/api/lists/user/:username/:name", async(req, res) => {
+    try {
+        let list = await List.find({
+            username: req.params.username,
+            name: req.params.name
+        });
+        return res.send({
+            list: list
+        });
     } catch(error) {
         console.log(error);
         res.sendStatus(500);
@@ -144,8 +187,7 @@ app.delete("/api/lists/:listID/rocks/:rockID", async(req, res) => {
 
 
 
-const users = require("./users.js");
-app.use("/api/users", users.routes);
+
 
 
 

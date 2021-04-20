@@ -54,7 +54,6 @@ const User = mongoose.model("user", userSchema);
 
 // Checks for valid users that are logged in
 const validUser = async (req, res, next) => {
-    console.log("Here");
   if (!req.session.userID)
     return res.status(403).send({
       message: "not logged in"
@@ -131,7 +130,6 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    console.log("Here");
     if (!req.body.username || !req.body.password)
         return res.sendStatus(400);
 

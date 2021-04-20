@@ -70,14 +70,24 @@ export default {
         async getRocks() {
 
 
-                const response = await axios.get("/api/lists/606c9af21c85c77397aa37aa/rocks");
-                this.rocks = response.data;
+            // const response = await axios.get("/api/lists/606c9af21c85c77397aa37aa/rocks");
+            // this.rocks = response.data;
+            // console.log("VISITED: ", this.rocks);
+
+            let username = this.$root.$data.user.username;
+            const response = await axios.get(`/api/lists/user/${username}/Visited`);
+            let listID = response.data.list[0]._id;
+            const response2 = await axios.get(`/api/lists/${listID}/rocks`);
+            this.rocks = response2.data;
 
         },
         async remove(mountain) {
 
-                await axios.delete(`/api/lists/606c9af21c85c77397aa37aa/rocks/${mountain._id}`);
-                this.getRocks();
+            let username = this.$root.$data.user.username;
+            const response = await axios.get(`/api/lists/user/${username}/Visited`);
+            let listID = response.data.list[0]._id;
+            await axios.delete(`/api/lists/${listID}/rocks/${mountain._id}`);
+            this.getRocks();
 
         }
     },
