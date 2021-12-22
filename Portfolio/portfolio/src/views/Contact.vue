@@ -66,7 +66,7 @@
 
 a {
     text-decoration: none;
-    color: #D8C3A5;
+    color: #C8B59A;
     font-weight: bold;
 }
 
