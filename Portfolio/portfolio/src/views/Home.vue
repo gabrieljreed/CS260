@@ -5,6 +5,10 @@
           <div class="wrapperText" :class="$mq">
               <h1>Gabriel Reed</h1>
               <h2>Technical Artist & Programmer</h2>
+
+              <p>
+                  &emsp;I'm a junior studying Computer Science with an emphasis in Animation at Brigham Young University. I'm mainly interested in pipeline and workflow, especially how animation processes can be sped up through scripting, motion capture, and realtime rendering. I also enjoy modeling and procedural texturing as well as creating effects in UE4 Niagara.
+              </p>
           </div>
       </div>
 
@@ -45,6 +49,16 @@ img.headshot {
 .wrapperText.mobile {
     padding: 10px;
     word-break: break-all;
+}
+
+.wrapperText p {
+    color: #2C3D50;
+    font-family: 'Cabin', sans-serif;
+    font-weight: normal;
+    max-width: 500px;
+    word-break: normal;
+    text-align: justify;
+    line-height: 1.5;
 }
 
 

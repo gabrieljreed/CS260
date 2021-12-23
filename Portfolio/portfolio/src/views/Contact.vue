@@ -3,20 +3,25 @@
     <h1><i>Say hi!</i></h1>
 
     <div class="cards" :class="$mq">
+        <a href="https://github.com/gabrieljreed/">
         <div class="card">
-            <!-- <a href="https://github.com/gabrieljreed/"> <img alt="GitHub logo" src="../assets/github.png"> </a> -->
-            <p style="text-align: center;"> <a href="https://github.com/gabrieljreed/">GITHUB</a> </p>
-        </div>
+            GITHUB
+        </div></a>
+
+        <a href="https://www.instagram.com/gabe.comics/">
         <div class="card">
-            <!-- <a href="https://www.instagram.com/gabe.comics/"> <img alt="Instagram logo" src="../assets/instagram.png"> </a> -->
-            <p style="text-align: center;"> <a href="https://www.instagram.com/gabe.comics/">INSTAGRAM</a> </p>
-        </div>
+            INSTAGRAM
+        </div></a>
+
+        <a href = "https://drive.google.com/file/d/1BRxEtO6xNlvBMcC0uheEt8E4VdgLmtvB/view?usp=sharing">
         <div class="card">
-            <a href = "https://drive.google.com/file/d/1BRxEtO6xNlvBMcC0uheEt8E4VdgLmtvB/view?usp=sharing">MY RESUME</a>
-        </div>
+            MY RESUME
+        </div></a>
+
+        <a href = "mailto: gabrieljreed@gmail.com">
         <div class="card">
-            <a href = "mailto: gabrieljreed@gmail.com">EMAIL ME!</a>
-        </div>
+            EMAIL ME!
+        </div></a>
     </div>
 
 

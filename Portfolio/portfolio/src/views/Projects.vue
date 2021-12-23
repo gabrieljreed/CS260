@@ -4,11 +4,18 @@
 
     <div class="Projects">
 
-        <router-link to="/projects/AvastYe"><div class="Project">
+        <router-link to="/projects/BackburnerScripting"><div class="Project">
             <div class="Thumbnail">
-                <img src="../assets/AvastYe/proceduralSticks.png"/>
+                <img src="../assets/Pronounce/pronounce.png" style="object-position: left top;"/>
             </div>
-            <h2>Making procedural textures in Unreal Engine 4 - Avast Ye, BYU Animation</h2>
+            <h2>Scripting with Backburner: IPA pronunciation - BYU Media Services</h2>
+        </div></router-link>
+
+        <router-link to="/projects/iORA"><div class="Project">
+            <div class="Thumbnail">
+                <img src="../assets/iORA/iORAOverview.png" style="object-position: left top;"/>
+            </div>
+            <h2>Realtime procedural animations on iOS - iORA, BYU Chemistry</h2>
         </div></router-link>
 
         <router-link to="/projects/LiveLink"><div class="Project">
@@ -18,11 +25,11 @@
             <h2>MVN Live Link to Unreal Engine: Realtime motion capture in UE4 - BYU Media Services</h2>
         </div></router-link>
 
-        <router-link to="/projects/BackburnerScripting"><div class="Project">
+        <router-link to="/projects/AvastYe"><div class="Project">
             <div class="Thumbnail">
-                <img src="../assets/Pronounce/pronounce.png" style="object-position: left top;"/>
+                <img src="../assets/AvastYe/proceduralSticks.png"/>
             </div>
-            <h2>Scripting with Backburner: IPA pronunciation - BYU Media Services</h2>
+            <h2>Making procedural textures in Unreal Engine 4 - Avast Ye, BYU Animation</h2>
         </div></router-link>
 
     </div>
@@ -64,9 +71,9 @@
     width: 100px;
     height: 100px;
     object-fit: cover;
-    padding: 10px;
-    border: 2px solid #333;
-    /* border-radius: 0px; */
+    margin: 10px;
+    border: 2px solid #2C3D50;
+    border-radius: 2px;
     /* padding: 5px; */
 }
 

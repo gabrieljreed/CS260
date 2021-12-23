@@ -9,6 +9,7 @@ import Contact from '../views/Contact.vue'
 import AvastYe from '../views/projects/AvastYe.vue'
 import LiveLink from '../views/projects/MVNLiveLinkUE4.vue'
 import Backburner from '../views/projects/Backburner.vue'
+import iORA from '../views/projects/iORA.vue'
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,11 @@ const routes = [
         path: '/projects/BackburnerScripting',
         name: 'Scripting with Backburner: IPA pronunciation',
         component: Backburner
+    },
+    {
+        path: '/projects/iORA',
+        name: 'iORA',
+        component: iORA
     }
 ]
 

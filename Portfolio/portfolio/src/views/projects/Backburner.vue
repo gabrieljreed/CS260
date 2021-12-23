@@ -46,5 +46,6 @@
     font-weight: normal;
     font-family: 'Cabin', sans-serif;
     line-height: 1.5;
+    color: #2C3E52;
 }
 </style>
